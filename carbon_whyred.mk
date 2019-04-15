@@ -27,6 +27,7 @@ $(call inherit-product, device/xiaomi/whyred/device.mk)
 $(call inherit-product, vendor/carbon/config/gsm.mk)
 $(call inherit-product, vendor/carbon/config/common.mk)
 
+PRODUCT_DEVICE := whyred
 PRODUCT_NAME := carbon_whyred
 PRODUCT_BRAND := Xiaomi
 PRODUCT_DEVICE := whyred
