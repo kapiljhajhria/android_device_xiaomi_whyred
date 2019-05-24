@@ -14,26 +14,30 @@
 # limitations under the License.
 #
 
-# Inherit from those products. Most specific first.
+# Release name
+PRODUCT_RELEASE_NAME := whyred
+
+$(call inherit-product, build/target/product/embedded.mk)
+
+# Inherit from our custom product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_n_mr1.mk)
-
 $(call inherit-product-if-exists, vendor/MiuiCamera/config.mk)
+$(call inherit-product, vendor/carbon/config/common.mk)
+$(call inherit-product, vendor/carbon/config/gsm.mk)
+
+
 
 # Inherit from whyred device
 $(call inherit-product, device/xiaomi/whyred/device.mk)
 
-# Inherit some common LineageOS stuff.
-TARGET_BOOT_ANIMATION_RES := 1080
-TARGET_GAPPS_ARCH := arm64
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
-
-PRODUCT_NAME := lineage_whyred
-PRODUCT_BRAND := Xiaomi
+## Device identifier. This must come after all inclusions
+PRODUCT_NAME := carbon_whyred
 PRODUCT_DEVICE := whyred
 PRODUCT_MANUFACTURER := Xiaomi
-PRODUCT_MODEL := Redmi Note 5
+PRODUCT_BRAND := Xiaomi
+PRODUCT_MODEL := Redmi Note 5 Pro
+PRODUCT_FULL_TREBLE_OVERRIDE := true
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
@@ -46,6 +50,4 @@ BUILD_FINGERPRINT := "xiaomi/whyred/whyred:9/PKQ1.180904.001/V10.3.1.0.PEIMIXM:u
 
 TARGET_VENDOR := Xiaomi
 
-# Use Custom OTA
-PRODUCT_PROPERTY_OVERRIDES += \
-    lineage.updater.uri=https://raw.githubusercontent.com/kapiljhajhria/lineage_OTA/master/apitest.json
+
