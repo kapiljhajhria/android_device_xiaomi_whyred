@@ -46,4 +46,4 @@ TARGET_VENDOR := Xiaomi
 
 # Use Custom OTA
 PRODUCT_PROPERTY_OVERRIDES += \
-    lineage.updater.uri=https://raw.githubusercontent.com/SubhrajyotiSen/OTA/master/LOS.json
+    lineage.updater.uri=https://raw.githubusercontent.com/kapiljhajhria/lineage_OTA/master/apitest.json
