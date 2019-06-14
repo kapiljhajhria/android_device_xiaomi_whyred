@@ -149,7 +149,7 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-service \
     libxml2
 
-$(call inherit-product, packages/apps/GoogleCameraMod/whyred/config.mk)
+# $(call inherit-product, packages/apps/GoogleCameraMod/whyred/config.mk)
 
 # CNE
 PRODUCT_PACKAGES += \
