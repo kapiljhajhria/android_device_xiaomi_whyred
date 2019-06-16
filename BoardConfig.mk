@@ -65,8 +65,10 @@ TARGET_KERNEL_CLANG_COMPILE := true
 #TARGET_KERNEL_CLANG_VERSION := 9.0.3
 
 # QCOM
+TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_USE_SDCLANG := true
+TARGET_USES_QCOM_BSP := false
 
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
@@ -74,6 +76,11 @@ BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
 # Assert
 TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/board-info.txt
 TARGET_OTA_ASSERT_DEVICE := whyred
+
+# Audio/Media/Display
+TARGET_QCOM_AUDIO_VARIANT := caf-msm8998
+TARGET_QCOM_MEDIA_VARIANT := caf-msm8998
+TARGET_QCOM_DISPLAY_VARIANT := caf-msm8998
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
@@ -123,6 +130,7 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 QCOM_BT_USE_BTNV := true
 TARGET_USE_QTI_BT_STACK := true
+TARGET_QCOM_BLUETOOTH_VARIANT := caf-msm8998
 
 # Camera
 TARGET_USES_QTI_CAMERA_DEVICE := true
@@ -152,6 +160,7 @@ TARGET_USES_OVERLAY := true
 USE_OPENGL_RENDERER := true
 SF_VSYNC_EVENT_PHASE_OFFSET_NS := 6000000
 VSYNC_EVENT_PHASE_OFFSET_NS := 2000000
+BOARD_USES_ADRENO := true
 
 # DRM
 TARGET_ENABLE_MEDIADRM_64 := true
@@ -165,6 +174,8 @@ TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 # FM
 BOARD_HAVE_QCOM_FM := true
 BOARD_HAS_QCA_FM_SOC := "cherokee"
+BOARD_HAVE_FM_RADIO := true
+BOARD_DISABLE_FMRADIO_LIBJNI := true
 
 # GPS
 TARGET_NO_RPC := true
@@ -235,6 +246,7 @@ BOARD_SECCOMP_POLICY := $(DEVICE_PATH)/seccomp
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
+include vendor/omni/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 BOARD_PLAT_PUBLIC_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/public
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
@@ -267,14 +279,7 @@ WIFI_HIDL_FEATURE_DUAL_INTERFACE := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Enable dex pre-opt to speed up initial boot
-ifeq ($(HOST_OS),linux)
-  ifneq ($(TARGET_BUILD_VARIANT),eng)
-    ifeq ($(WITH_DEXPREOPT),)
-      WITH_DEXPREOPT := true
-      WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
-    endif
-  endif
-endif
+
 PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI
 
 # inherit from the proprietary version
